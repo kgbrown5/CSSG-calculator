@@ -5,13 +5,17 @@ const subtract = document.getElementById("subtract")
 const multiply = document.getElementById("multiply")
 const divide = document.getElementById("divide")
 const output = document.getElementById("output")
+const previous = document.getElementById("previous")
+const clear = document.getElementById("clear")
+
+let previousAnswer = 0
 
 function addFunction(a,b){
-   return a + b
+    return a + b
 }
 
 function subtractFunction(a,b){
-   return  a - b
+    return  a - b
 }
 
 function multiplyFunction(a,b){
@@ -19,81 +23,42 @@ function multiplyFunction(a,b){
 }
 
 function divideFunction(a,b){
-   return a / b
+    return a / b
 }
 
-add.addEventListener("click", function(){
-
-    
-    const firstArg= Number(firstInput.value);
-    const secondArg= Number(secondInput.value);
-    
-    if (!isNaN(firstArg) && !isNaN(secondArg)) {
-        const result = addFunction(firstArg,secondArg);
-        output.textContent = `${result}`;
-        
-    }else{
-        output.textContent = "Enter valid numbers only!";
-
-    }
-    
-    
+add.addEventListener("click", () => {
+    let result = addFunction(Number(firstInput.value),Number(secondInput.value));
+    previousAnswer = result;
+    output.textContent = `${result}`;
     });
 
 
 
-subtract.addEventListener("click", function(){
-    
-    const firstArg= Number(firstInput.value);
-    const secondArg= Number(secondInput.value);
-        
-    
-    if (!isNaN(firstArg) && !isNaN(secondArg)) {
-        const result = subtractFunction(firstArg,secondArg);
-        output.textContent = `${result}`;
-    }else{
-        output.textContent = "Enter valid numbers only!";
-    
-    }
-        
+subtract.addEventListener("click", () => {
+    let result = subtractFunction(Number(firstInput.value),Number(secondInput.value));
+    previousAnswer = result;
+    output.textContent = `${result}`;   
     });
 
-multiply.addEventListener("click", function(){
-    
-
-    const firstArg= Number(firstInput.value);
-    const secondArg= Number(secondInput.value);
-            
-        
-    if (!isNaN(firstArg) && !isNaN(secondArg)) {
-        const result = multiplyFunction(firstArg,secondArg);
-        output.textContent = `${result}`;
-    }else{
-        output.textContent = "Enter valid numbers only!";
-        
-    }
-            
+multiply.addEventListener("click", () => {
+    let result = multiplyFunction(Number(firstInput.value),Number(secondInput.value));
+    previousAnswer = result;
+    output.textContent = `${result}`;      
     });
 
-divide.addEventListener("click", function(){
-    
-    const firstArg= Number(firstInput.value);
-    const secondArg= Number(secondInput.value);
-            
-        
-    if (!isNaN(firstArg) && !isNaN(secondArg)) {
-        if(secondArg == 0) {
-            output.textContent = "Undefined (can't divide by zero)";
-        }else{
-        const result = divideFunction(firstArg,secondArg);
-        output.textContent = `${result}`;
-        }
-    }else{
-        output.textContent = "Enter valid numbers only!";
-        
-    }
-            
+divide.addEventListener("click", () => {
+    let result = divideFunction(Number(firstInput.value),Number(secondInput.value));
+    previousAnswer = result;
+    output.textContent = `${result}`;
     });
 
 
-   
+clear.addEventListener('click', () => {
+    firstInput.value = "";
+    secondInput.value = "";
+    output.textContent = "";
+});
+
+previous.addEventListener('click', () => {
+    firstInput.value = `${previousAnswer}`;
+})
